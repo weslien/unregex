@@ -3,7 +3,7 @@ package utils
 // Version information set during build by the Makefile
 var (
 	// Version is the semantic version of the application
-	Version = "0.1.0-dev"
+	Version = "0.2.0"
 	
 	// GitCommit is the git commit hash of the build
 	GitCommit = "unknown"
