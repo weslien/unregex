@@ -1,0 +1,63 @@
+# .goreleaser.yml
+project_name: unregex
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    main: ./cmd/myapp
+    ldflags:
+      - -s -w
+      - -X github.com/unregex/pkg/utils.Version={{ .Version }}
+      - -X github.com/unregex/pkg/utils.GitCommit={{ .ShortCommit }}
+      - -X github.com/unregex/pkg/utils.BuildDate={{ .Date }}
+    binary: unregex
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+brews:
+  - name: unregex
+    tap:
+      owner: weslien
+      name: homebrew-tap
+    commit_author:
+      name: Gustav Weslien
+      email: gustav.weslien@gmail.com
+    description: "A tool to visualize and explain regular expressions"
+    homepage: "https://github.com/weslien/unregex"
+    license: "MIT"
+    install: |
+      bin.install "unregex"
+    test: |
+      system "#{bin}/unregex", "-version"
