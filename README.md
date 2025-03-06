@@ -152,7 +152,7 @@ unregex/
 ### Adding dependencies
 
 ```bash
-go get github.com/example/package
+go get github.com/weslien/unregex
 ```
 
 ## License
