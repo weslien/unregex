@@ -1,4 +1,4 @@
-module github.com/unregex
+module github.com/weslien/unregex
 
 go 1.21
 

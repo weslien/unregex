@@ -3,7 +3,7 @@ package app
 import (
 	"fmt"
 
-	"github.com/unregex/internal/format"
+	"github.com/weslien/unregex/internal/format"
 )
 
 // Run executes the main application logic
@@ -13,13 +13,13 @@ func Run(args []string) error {
 	}
 
 	pattern := args[0]
-	
+
 	// Get the format from args or default to "go"
 	formatName := "go"
 	if len(args) > 1 {
 		formatName = args[1]
 	}
-	
+
 	return ExplainRegex(pattern, formatName)
 }
 
@@ -27,23 +27,23 @@ func Run(args []string) error {
 func ExplainRegex(pattern, formatName string) error {
 	// Get the appropriate regex format implementation
 	regexFormat := format.GetFormat(formatName)
-	
+
 	fmt.Printf("Analyzing regex pattern: %s\n", pattern)
 	fmt.Printf("Format: %s\n\n", regexFormat.Name())
-	
+
 	// Get features supported by this format
 	printSupportedFeatures(regexFormat)
-	
+
 	// Tokenize and explain the pattern
 	tokens := regexFormat.TokenizeRegex(pattern)
-	
+
 	for i, token := range tokens {
 		explanation := regexFormat.ExplainToken(token)
 		fmt.Printf("%d. %s: %s\n", i+1, token, explanation)
 	}
-	
+
 	fmt.Println("\nNOTE: This is a basic regex explainer. Some complex patterns might not be perfectly tokenized.")
-	
+
 	return nil
 }
 
@@ -65,9 +65,9 @@ func printSupportedFeatures(regexFormat format.RegexFormat) {
 		{name: "Backreferences", code: format.FeatureBackreference, description: "\\1, \\2, etc."},
 		{name: "Named Backreferences", code: format.FeatureNamedBackref, description: "\\k<name>"},
 	}
-	
+
 	fmt.Println("Supported Features:")
-	
+
 	for _, feature := range features {
 		supported := "✗"
 		if regexFormat.HasFeature(feature.code) {
@@ -75,6 +75,6 @@ func printSupportedFeatures(regexFormat format.RegexFormat) {
 		}
 		fmt.Printf("  %s %s (%s)\n", supported, feature.name, feature.description)
 	}
-	
+
 	fmt.Println()
-} 
+}

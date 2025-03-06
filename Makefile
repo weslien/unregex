@@ -3,7 +3,7 @@
 # Go parameters
 BINARY_NAME=unregex
 GO=go
-MAIN_PACKAGE=./cmd/myapp
+MAIN_PACKAGE=./cmd/unregex
 
 # Build and package directories
 BUILD_DIR=build
@@ -13,7 +13,7 @@ DIST_DIR=dist
 VERSION=0.1.0
 GIT_COMMIT=$(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 BUILD_DATE=$(shell date +%FT%T%z)
-LDFLAGS=-ldflags "-X github.com/unregex/pkg/utils.Version=$(VERSION) -X github.com/unregex/pkg/utils.GitCommit=$(GIT_COMMIT) -X github.com/unregex/pkg/utils.BuildDate=$(BUILD_DATE)"
+LDFLAGS=-ldflags "-X github.com/weslien/unregex/pkg/utils.Version=$(VERSION) -X github.com/weslien/unregex/pkg/utils.GitCommit=$(GIT_COMMIT) -X github.com/weslien/unregex/pkg/utils.BuildDate=$(BUILD_DATE)"
 
 # Default target
 .PHONY: all

@@ -1,4 +1,5 @@
 # .goreleaser.yml
+version: 2
 project_name: unregex
 
 before:
@@ -15,12 +16,12 @@ builds:
     goarch:
       - amd64
       - arm64
-    main: ./cmd/myapp
+    main: ./cmd/unregex
     ldflags:
       - -s -w
-      - -X github.com/unregex/pkg/utils.Version={{ .Version }}
-      - -X github.com/unregex/pkg/utils.GitCommit={{ .ShortCommit }}
-      - -X github.com/unregex/pkg/utils.BuildDate={{ .Date }}
+      - -X github.com/weslien/unregex/pkg/utils.Version={{ .Version }}
+      - -X github.com/weslien/unregex/pkg/utils.GitCommit={{ .ShortCommit }}
+      - -X github.com/weslien/unregex/pkg/utils.BuildDate={{ .Date }}
     binary: unregex
 
 archives:

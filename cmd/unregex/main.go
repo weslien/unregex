@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/unregex/internal/app"
-	"github.com/unregex/pkg/utils"
+	"github.com/weslien/unregex/internal/app"
+	"github.com/weslien/unregex/pkg/utils"
 )
 
 func main() {
@@ -31,24 +31,24 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  unregex -format pcre \"(?<=look)behind\"\n")
 		fmt.Fprintf(os.Stderr, "  echo \"a{2,4}b[a-z]*\\d+\" | unregex\n")
 	}
-	
+
 	// Parse command-line flags
 	flag.Parse()
-	
+
 	// Show help message and exit
 	if *helpFlag {
 		flag.Usage()
 		os.Exit(0)
 	}
-	
+
 	// Show version information and exit
 	if *versionFlag {
 		fmt.Println(utils.GetVersionInfo())
 		os.Exit(0)
 	}
-	
+
 	fmt.Printf("Unregex - Regex Visualizer v%s\n\n", utils.Version)
-	
+
 	// Validate regex format
 	format := strings.ToLower(*formatFlag)
 	if !utils.IsValidFormat(format) {
@@ -56,7 +56,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Supported formats: go, pcre, posix, js, python\n")
 		os.Exit(1)
 	}
-	
+
 	// Get regex pattern from arguments or stdin
 	pattern, err := getRegexPattern()
 	if err != nil {
@@ -64,7 +64,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Run 'unregex -help' for usage information")
 		os.Exit(1)
 	}
-	
+
 	// Run the regex explanation with the selected format
 	if err := app.Run([]string{pattern, format}); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
@@ -78,7 +78,7 @@ func getRegexPattern() (string, error) {
 	if flag.NArg() > 0 {
 		return flag.Arg(0), nil
 	}
-	
+
 	// Check if data is being piped in through stdin
 	stat, _ := os.Stdin.Stat()
 	if (stat.Mode() & os.ModeCharDevice) == 0 {
@@ -88,16 +88,16 @@ func getRegexPattern() (string, error) {
 		if err != nil {
 			return "", fmt.Errorf("failed to read from stdin: %v", err)
 		}
-		
+
 		// Trim whitespace and newlines
 		pattern := strings.TrimSpace(string(input))
 		if pattern == "" {
 			return "", fmt.Errorf("empty pattern received from stdin")
 		}
-		
+
 		return pattern, nil
 	}
-	
+
 	// No pattern provided
 	return "", fmt.Errorf("no regex pattern provided")
-} 
+}
