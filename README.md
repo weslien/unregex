@@ -8,6 +8,26 @@ Regular expressions can be difficult to understand at a glance. Unregex breaks d
 
 ## Installation
 
+### Using Homebrew (macOS/Linux)
+
+The easiest way to install Unregex is via Homebrew:
+
+```bash
+# Add the tap repository
+brew tap weslien/tap
+
+# Install unregex
+brew install unregex
+```
+
+### Using Go Install
+
+You can also install directly using Go:
+
+```bash
+go install github.com/weslien/unregex@latest
+```
+
 ### Prerequisites
 
 - Go 1.21 or higher
@@ -154,6 +174,14 @@ unregex/
 ```bash
 go get github.com/weslien/unregex
 ```
+
+### Homebrew Tap Repository
+
+Unregex is distributed via a Homebrew tap repository. The tap repository is located at [github.com/weslien/homebrew-tap](https://github.com/weslien/homebrew-tap).
+
+The tap repository contains formula files for all packages published by the author. This follows Homebrew's convention of having one tap repository per developer/organization rather than one per package.
+
+When new versions of Unregex are released, the tap repository is automatically updated with the new formula via GitHub Actions.
 
 ## License
 
