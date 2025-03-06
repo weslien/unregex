@@ -1,4 +1,5 @@
-package main
+// Package cli provides the command-line interface for unregex
+package cli
 
 import (
 	"bufio"
@@ -12,8 +13,8 @@ import (
 	"github.com/weslien/unregex/pkg/utils"
 )
 
-// Main is the exported entrypoint that can be called from the root main.go
-func Main() {
+// Run executes the CLI application
+func Run() {
 	// Define command-line flags
 	formatFlag := flag.String("format", "go", "Regex format/flavor (go, pcre, posix, js, python)")
 	helpFlag := flag.Bool("help", false, "Show help message")
@@ -71,10 +72,6 @@ func Main() {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
 	}
-}
-
-func main() {
-	Main()
 }
 
 // getRegexPattern retrieves the regex pattern from command line arguments or stdin

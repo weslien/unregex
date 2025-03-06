@@ -1,3 +1,5 @@
+// Package main provides a simplified entrypoint for the unregex tool
+// This allows users to install with: go install github.com/weslien/unregex@v0.1.0
 package main
 
 import (
@@ -12,8 +14,7 @@ import (
 	"github.com/weslien/unregex/pkg/utils"
 )
 
-// Main is the exported entrypoint that can be called from the root main.go
-func Main() {
+func main() {
 	// Define command-line flags
 	formatFlag := flag.String("format", "go", "Regex format/flavor (go, pcre, posix, js, python)")
 	helpFlag := flag.Bool("help", false, "Show help message")
@@ -71,10 +72,6 @@ func Main() {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
 	}
-}
-
-func main() {
-	Main()
 }
 
 // getRegexPattern retrieves the regex pattern from command line arguments or stdin
