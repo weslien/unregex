@@ -17,6 +17,7 @@ import (
 func main() {
 	// Define command-line flags
 	formatFlag := flag.String("format", "go", "Regex format/flavor (go, pcre, posix, js, python)")
+	visualizeFlag := flag.Bool("visualize", false, "Output visual annotation of the regex with numbered parts")
 	helpFlag := flag.Bool("help", false, "Show help message")
 	versionFlag := flag.Bool("version", false, "Show version information")
 
@@ -31,6 +32,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "\nExamples:\n")
 		fmt.Fprintf(os.Stderr, "  unregex \"^hello(world|universe)[0-9]+$\"\n")
 		fmt.Fprintf(os.Stderr, "  unregex -format pcre \"(?<=look)behind\"\n")
+		fmt.Fprintf(os.Stderr, "  unregex -visualize \"a{2,4}b[a-z]*\\d+\"\n")
 		fmt.Fprintf(os.Stderr, "  echo \"a{2,4}b[a-z]*\\d+\" | unregex\n")
 	}
 
@@ -68,7 +70,7 @@ func main() {
 	}
 
 	// Run the regex explanation with the selected format
-	if err := app.Run([]string{pattern, format}); err != nil {
+	if err := app.Run([]string{pattern, format, fmt.Sprintf("%v", *visualizeFlag)}); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
 	}

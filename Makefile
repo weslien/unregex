@@ -3,7 +3,7 @@
 # Go parameters
 BINARY_NAME=unregex
 GO=go
-MAIN_PACKAGE=./cmd/unregex
+MAIN_PACKAGE=./
 
 # Build and package directories
 BUILD_DIR=build

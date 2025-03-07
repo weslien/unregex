@@ -36,7 +36,7 @@ go install github.com/weslien/unregex@latest
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/unregex.git
+git clone https://github.com/weslien/unregex.git
 cd unregex
 
 # Build using make
@@ -169,11 +169,7 @@ unregex/
 └── LICENSE               # License file
 ```
 
-### Adding dependencies
 
-```bash
-go get github.com/weslien/unregex
-```
 
 ### Homebrew Tap Repository
 
