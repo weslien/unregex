@@ -16,7 +16,7 @@ builds:
     goarch:
       - amd64
       - arm64
-    main: ./cmd/unregex
+    main: ./
     ldflags:
       - -s -w
       - -X github.com/weslien/unregex/pkg/utils.Version={{ .Version }}
